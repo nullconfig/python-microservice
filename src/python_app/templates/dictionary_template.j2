@@ -1,0 +1,12 @@
+{
+    "{{ repos.username }}": {
+        "public_repos_found": [
+        {%- for repo in repos.repos_list %}
+            "{{ repo }}"
+            {% if not loop.last %}
+            ,
+            {% endif %}
+        {%- endfor %}
+        ]
+    }
+}

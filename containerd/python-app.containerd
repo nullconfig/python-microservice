@@ -1,0 +1,26 @@
+FROM python:3.7.9-alpine3.12
+
+# Install python application requirements
+ADD ./containerd/requirements.txt /opt/requirements.txt
+RUN pip install -r /opt/requirements.txt
+
+# Configure the interface and make it executable
+ADD ./bin/python-app-exec.py /usr/bin/python-app-exec.py
+RUN chmod +x /usr/bin/python-app-exec.py
+RUN ln -s /usr/bin/python-app-exec.py /usr/bin/python-app-exec
+
+# Setup module installation
+WORKDIR /opt
+ENV INSTALL_DIR=/usr/local/lib/python3.7/site-packages/
+
+ADD ./src/python-app /opt/python-app
+ADD ./setup.py /opt/setup.py
+
+RUN python setup.py build_pythonapp
+RUN python setup.py install --prefix=$INSTALL_DIR
+
+# Move python package and clean up
+ADD ./src/python-app /usr/local/lib/python3.7/site-packages/python-app
+RUN rm -rf /opt/*
+
+ENTRYPOINT ["python-app-exec"]
