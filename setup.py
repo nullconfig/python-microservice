@@ -11,6 +11,7 @@ from shutil import rmtree
 NAME='python_app'
 DESCRIPTION='boilerplate python application'
 AUTHOR='nullconfig'
+EMAIL='nullconfig@gmail.com'
 VERSION='0.0.1'
 REQUIRES_PYTHON = '>=3.6.0'
 URL='https://github.com/nullconfig/python-microservice'
@@ -59,6 +60,7 @@ setup(
     version=VERSION,
     description=DESCRIPTION,
     author=AUTHOR,
+    author_email=EMAIL,
     url=URL,
     long_description=open('README.md').read(),
     install_requires=REQUIRED,

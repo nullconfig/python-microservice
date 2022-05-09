@@ -11,16 +11,17 @@ RUN ln -s /usr/bin/python-app-exec.py /usr/bin/python-app-exec
 
 # Setup module installation
 WORKDIR /opt
-ENV INSTALL_DIR=/usr/local/lib/python3.7/site-packages/
+ENV INSTALL_DIR=/usr/local/lib/python3.7/site-packages
 
-ADD ./src/python-app /opt/python-app
+ADD ./src/python_app /opt/python_app
 ADD ./setup.py /opt/setup.py
 
-RUN python setup.py build_pythonapp
-RUN python setup.py install --prefix=$INSTALL_DIR
+ADD README.md /opt/README.md
+RUN python setup.py python_package
+RUN python setup.py install
 
 # Move python package and clean up
-ADD ./src/python-app /usr/local/lib/python3.7/site-packages/python-app
+ADD ./src/python_app /usr/local/lib/python3.7/site-packages/python_app
 RUN rm -rf /opt/*
 
 ENTRYPOINT ["python-app-exec"]
