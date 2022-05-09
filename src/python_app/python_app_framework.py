@@ -20,7 +20,7 @@ class GithubApiBot(object):
 
   def consul_register(self, data) -> None:
     ''' Registers any data received to consul '''
-    requests.put(f'http://127.0.0.1:8500/v1/catalog/register', data=data)
+    requests.put(f"http://127.0.0.1:8500/v1/catalog/register", data=data)
 
   def serialize_data(self, data) -> json:
     ''' Consul normalizer '''

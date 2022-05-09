@@ -6,7 +6,7 @@ class AppCommandLine(object):
   '''
   def app_cmd():
     ''' parse command line arguments passed in '''
-    parser = argparse.ArgumentParser(description='Boilerplate cli interface')
+    parser = argparse.ArgumentParser(description= "Boilerplate cli interface")
     parser.add_argument('-u', '--username', 
                         help="Retrieve data from upstream api interface", 
                         required=True)
