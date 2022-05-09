@@ -4,7 +4,7 @@ class AppCommandLine(object):
   '''
   GithubApiBot command line interface
   '''
-  def cmd_parser():
+  def app_cmd():
     ''' parse command line arguments passed in '''
     parser = argparse.ArgumentParser(description='Boilerplate cli interface')
     parser.add_argument('-u', '--username', 

@@ -16,9 +16,7 @@ class GithubApiBot(object):
 
   def github_user(self) -> json:
     ''' Takes the username passed in at instantiation, and returns all of the repos found. '''
-    response = requests.get(f"https://api.github.com/users/{self.username}/repos").json()
-
-    return json.dumps(response)
+    return json.dumps(requests.get(f"https://api.github.com/users/{self.username}/repos").json())
 
   def consul_register(self, data) -> None:
     ''' Registers any data received to consul '''
