@@ -3,14 +3,15 @@
 Example python cli boilerplate
 '''
 
-from python_app import python_app_framework as app
-from python_app import python_cli_framework as cli
+import json
+from python_app.python_app_framework import GithubApiBot as bot
+from python_app.python_cli_framework import AppCommandLine as cli
 
 def main() -> None:
-    args = cli.AppCommandLine.app_cmd()
+    if cli.app_cmd().username and cli.app_cmd().get:
+        output = bot(cli.app_cmd().username).github_user()
 
-    if args.username and args.get:
-        print(app.GithubApiBot(args.username).github_user())
+    print(json.dumps([i['name'] for i in output]))
 
 if __name__ == "__main__":
     main()
