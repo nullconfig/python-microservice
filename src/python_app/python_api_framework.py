@@ -1,10 +1,9 @@
-import os
-from flask import Flask, Response, request, render_template
+import os, json
+from flask import Flask, Response, render_template
 from python_app.python_app_framework import GithubApiBot
-from helpers.middleware import setup_metrics
-import prometheus_client
-
-CONTENT_TYPE_LATEST = str('text/plain; version=0.0.4; charset=utf-8')
+from python_app.metrics.python_app_metrics import setup_metrics
+from prometheus_client import REGISTRY
+from prometheus_client.openmetrics.exposition import generate_latest
 
 app = Flask(__name__)
 setup_metrics(app)
@@ -30,7 +29,8 @@ def retrieve_api_data(username):
 
 @app.route("/metrics")
 def metrics():
-    return Response(prometheus_client.generate_latest(), mimetype=CONTENT_TYPE_LATEST)
+    return render_template('metrics.j2', metrics=generate_latest(REGISTRY).decode())
 
 if __name__ == '__main__':
-    app.run()
+    port = int(os.environ.get("PORT", 8888))
+    app.run(host="0.0.0.0", port=port)

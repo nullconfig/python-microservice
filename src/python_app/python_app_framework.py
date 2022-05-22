@@ -18,10 +18,6 @@ class GithubApiBot(object):
     ''' Takes the username passed in at instantiation, and returns all of the repos found. '''
     return requests.get(f"https://api.github.com/users/{self.username}/repos").json()
 
-  def consul_register(self, data) -> None:
-    ''' Registers any data received to consul '''
-    requests.put(f"http://127.0.0.1:8500/v1/catalog/register", data=data)
-
   def serialize_data(self, data) -> json:
     ''' Consul normalizer '''
 

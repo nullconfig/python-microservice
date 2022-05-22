@@ -2,7 +2,6 @@
 from flask import request
 from prometheus_client import Counter, Histogram
 import time
-import sys
 
 REQUEST_COUNT = Counter(
     'request_count', 'App Request Count',
