@@ -1,0 +1,3 @@
+FROM github-app
+
+ENTRYPOINT gunicorn --chdir /usr/local/lib/python3.7/site-packages python_app.python_api_framework:app -w 2 --threads 2 -b 0.0.0.0:8000
